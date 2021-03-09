@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Services\CheckExtensionServices;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\FileUploadServices;
 
 use Intervention\Image\Facades\Image;
 
@@ -70,28 +72,11 @@ class RegisterController extends Controller
 
         $imageFile = $data['img_name'];
 
-        $filenameWithExt = $imageFile->getClientOriginalName();
+        $list = FileUploadServices::fileUpload($imageFile);
 
-        $fileName = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        list($extension, $fileNameToStore, $fileData) = $list;
 
-        $extension = $imageFile->getClientOriginalExtension();
-
-        $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-
-        $fileData = file_get_contents($imageFile->getRealPath());
-
-        if ($extension = 'jpg') {
-            $data_url = 'data:image/jpg;base64,'.base64_encode($fileData);
-        }
-        if ($extension = 'jpeg') {
-            $data_url = 'data:image/jpg;base64,'.base64_encode($fileData);
-        }
-        if ($extension = 'png') {
-            $data_url = 'data:image/png;base64,'.base64_encode($fileData);
-        }
-        if ($extension = 'gif') {
-            $data_url = 'data:image/gif;base64,'.base64_encode($fileData);
-        }
+        $data_url = CheckExtensionServices::checkExtension($fileData, $extension);
 
         $image = Image::make($data_url);
 

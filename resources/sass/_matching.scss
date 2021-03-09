@@ -1,0 +1,82 @@
+.matchingPage {
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        color: #fd5068;
+        border-bottom: 1px solid #e8e8e8;
+
+        &_logo {
+            position: absolute;
+            left: 30px;
+
+            &>a {
+                width: 40px;
+                display: block;
+
+                &>img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .matchingNum {
+        text-align: center;
+        font-size: 12px;
+        color: #fd5068;
+        margin-bottom: 20px;
+    }
+
+    .pageTitle {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .matchingList {
+        margin-top: 30px;
+        padding: 0;
+
+        .matchingPerson {
+            display: flex;
+            align-items: center;
+            padding: 20px 0px;
+            border-bottom: 1px solid #e8e8e8;
+            position: relative;
+
+            &_img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 10px;
+
+                &>img {
+                    width: 100%;
+                }
+            }
+
+            &_name {}
+
+            form {
+                position: absolute;
+                right: 0;
+
+                .chatForm_btn {
+                    border: none;
+                    padding: 10px;
+                    background: #fd5068;
+                    color: #fff;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    transition: opacity .3s;
+
+                    &:hover {
+                        opacity: .7;
+                    }
+                }
+            }
+        }
+    }
+}
